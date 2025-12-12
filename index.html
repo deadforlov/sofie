@@ -6,91 +6,165 @@
   <title>Sofie — Meet Her</title>
   <meta name="description" content="Meet Sofie — confident, bold and waiting. Join now." />
   <style>
-    :root{--accent:#ff2d55;--dark:#0b0b0b;--muted:#f3f4f6}
+    :root{
+      --accent:#ff2d55;
+      --accent-2:#ff6b81;
+      --card-bg:rgba(0,0,0,.55);
+      --muted:#f3f4f6;
+      --glass:rgba(255,255,255,.06);
+    }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:#000;color:#fff;display:flex;align-items:center;justify-content:center}
-    .container{width:100%;max-width:420px;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.65));border-radius:16px;overflow:hidden;box-shadow:0 20px 50px rgba(2,6,23,.7)}
-    .hero{position:relative;height:780px /* 9:16 */;background:#111}
+    body{margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:#000;color:#fff;display:flex;align-items:center;justify-content:center;padding:20px}
+    .container{width:100%;max-width:420px;border-radius:16px;overflow:hidden;box-shadow:0 20px 50px rgba(2,6,23,.7);background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.65));}
+    .hero{position:relative;height:780px;background:#111}
     .hero img{width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.05) saturate(1.02)}
-    .overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:28px;backdrop-filter:blur(2px)}
+    .overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:22px;backdrop-filter:blur(2px)}
     .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(0,0,0,.5);font-size:13px;color:var(--muted);margin-bottom:10px}
     h1{margin:0;font-size:28px;letter-spacing:-0.02em}
-    p.lead{margin:8px 0 18px;color:rgba(255,255,255,.9);font-size:15px}
+    p.lead{margin:8px 0 14px;color:rgba(255,255,255,.92);font-size:15px}
     .cta{display:flex;gap:10px;align-items:center}
-    .btn{background:linear-gradient(90deg,var(--accent),#ff6b81);border:0;padding:14px 18px;border-radius:12px;color:#fff;font-weight:600;text-decoration:none;display:inline-block}
-    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,.12);padding:12px 16px}
+    .btn{background:linear-gradient(90deg,var(--accent),var(--accent-2));border:0;padding:12px 16px;border-radius:12px;color:#fff;font-weight:600;text-decoration:none;display:inline-block;font-size:15px}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,.12);padding:10px 14px;border-radius:12px}
     .meta{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:13px;color:rgba(255,255,255,.75)}
     footer{padding:12px 18px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.6));text-align:center;font-size:12px;color:rgba(255,255,255,.6)}
     .note{font-size:12px;color:rgba(255,255,255,.7);margin-top:8px}
-    @media(min-width:680px){.container{max-width:480px}.hero{height:860px}}
+
+    /* --- NEW: ad strip styles --- */
+    .ad-strip{
+      margin-top:14px;
+      background:linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.45));
+      border-radius:12px;
+      padding:10px;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      box-shadow:0 6px 18px rgba(0,0,0,.5);
+      max-width:100%;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+    .ad-card{
+      min-width:170px;
+      background:var(--card-bg);
+      border-radius:10px;
+      padding:8px;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-shrink:0;
+      transition:transform .15s ease, box-shadow .15s ease;
+    }
+    .ad-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,.6)}
+    .thumb{
+      width:56px;
+      height:56px;
+      border-radius:8px;
+      background-size:cover;
+      background-position:center;
+      flex-shrink:0;
+      border:1px solid rgba(255,255,255,.06);
+    }
+    .ad-info{flex:1;min-width:0}
+    .ad-name{font-weight:700;font-size:14px;margin:0;color:#fff}
+    .ad-desc{font-size:12px;margin:4px 0 6px;color:rgba(255,255,255,.8)}
+    .ad-action{display:flex;gap:6px;align-items:center}
+    .link-btn{font-size:13px;padding:6px 8px;border-radius:8px;text-decoration:none;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;font-weight:600}
+    .small-link{font-size:12px;padding:6px 8px;border-radius:8px;text-decoration:none;background:transparent;border:1px solid rgba(255,255,255,.08);color:#fff}
+
+    /* responsive tweaks */
+    @media(min-width:680px){
+      .container{max-width:480px}
+      .hero{height:860px}
+      .ad-card{min-width:200px}
+    }
   </style>
 </head>
 <body>
   <div class="container" role="main">
     <section class="hero">
-      <!--
-        ЗАМЕНИТЕ IMAGE SRC НИЖЕ на одно из присланных фото.
-        Возможные имена (как появились в переписке):
-        - rgthree.compare._temp_julsf_00071_.png
-        - rgthree.compare._temp_julsf_00015_.png
-        - rgthree.compare._temp_julsf_00137_.png
-        - rgthree.compare._temp_julsf_00128_.png
-        - rgthree.compare._temp_julsf_00077_.png
-        - rgthree.compare._temp_julsf_00093_.png
-        - rgthree.compare._temp_julsf_00064_.png
-        - rgthree.compare._temp_julsf_00047_.png
-        - rgthree.compare._temp_julsf_00002_.png
-        - rgthree.compare._temp_julsf_00069_.png
-        - (или любой другой, который ты хочешь использовать)
-
-        Если ты не уверена — оставь placeholder и замени путь на загруженную картинку в хостинге.
-      -->
+      <!--  Заменить src ниже на нужную фотку (URL или ваш хостинг). -->
       <img id="heroImg" src="https://github.com/deadforlov/sofie/blob/main/rgthree.compare._temp_julsf_00137_.png?raw=true" alt="Sofie — bold and confident" />
       <div class="overlay">
         <span class="badge">NEW • Sofie</span>
         <h1>Meet Sofie</h1>
         <p class="lead">Bold. Confident. Unapologetic. Ready to meet you.</p>
+
         <div class="cta">
           <a id="mainCta" class="btn" href="https://sisuny.top/click?o=2&a=3126" target="_blank" rel="noopener noreferrer">Meet her now</a>
           <a class="btn secondary" href="https://sisuny.top/click?o=2&a=3126" target="_blank" rel="noopener noreferrer">See more</a>
         </div>
+
+        <!-- ===== VISIBLE AD STRIP (compact, over the hero) ===== -->
+        <div class="ad-strip" aria-label="Exclusive more profiles">
+          <!-- Card 1 -->
+          <div class="ad-card">
+            <div class="thumb" style="background-image:url('https://github.com/deadforlov/sofie/blob/main/rgthree.compare._temp_julsf_00093_.png?raw=true');"></div>
+            <div class="ad-info">
+              <div class="ad-name">Lory</div>
+              <div class="ad-desc">Soft. Dangerous. Addictive.</div>
+              <div class="ad-action">
+                <a class="link-btn" href="https://onlyfans.com/lory_dark_21/c93" target="_blank" rel="noopener noreferrer">View profile</a>
+                <a class="small-link" href="https://onlyfans.com/lory_dark_21/c93" target="_blank" rel="noopener noreferrer">Preview</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="ad-card">
+            <div class="thumb" style="background-image:url('https://github.com/deadforlov/sofie/blob/main/rgthree.compare._temp_julsf_00103_.png?raw=true');"></div>
+            <div class="ad-info">
+              <div class="ad-name">Mari</div>
+              <div class="ad-desc">Hot. Playful. Unfiltered.</div>
+              <div class="ad-action">
+                <a class="link-btn" href="https://onlyfans.com/hottie.mari/c115" target="_blank" rel="noopener noreferrer">View profile</a>
+                <a class="small-link" href="https://onlyfans.com/hottie.mari/c115" target="_blank" rel="noopener noreferrer">Preview</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="ad-card">
+            <div class="thumb" style="background-image:url('https://github.com/deadforlov/sofie/blob/main/rgthree.compare._temp_julsf_00064_.png?raw=true');"></div>
+            <div class="ad-info">
+              <div class="ad-name">Stacy</div>
+              <div class="ad-desc">Sultry. VIP-only teasers.</div>
+              <div class="ad-action">
+                <a class="link-btn" href="https://onlyfans.com/stacy_hottea/c97" target="_blank" rel="noopener noreferrer">View profile</a>
+                <a class="small-link" href="https://onlyfans.com/stacy_hottea/c97" target="_blank" rel="noopener noreferrer">Preview</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Optional additional CTA card -->
+          <div class="ad-card" style="min-width:140px;justify-content:center;text-align:center;">
+            <div style="flex:1">
+              <div class="ad-name" style="font-size:13px">More like this</div>
+              <div class="ad-desc" style="font-size:12px;margin-bottom:8px">Top rated today • VIP picks</div>
+              <a class="link-btn" href="https://sisuny.top/click?o=2&a=3126" target="_blank" rel="noopener noreferrer">Explore more</a>
+            </div>
+          </div>
+        </div>
+        <!-- ===== END ad strip ===== -->
+
         <div class="meta">
           <div>Verified profile</div>
           <div class="note">18+ • For adults only</div>
         </div>
       </div>
     </section>
-    <footer id="more" id="more">
+
+    <footer id="more">
       <div>Curated for you — Join and discover.</div>
     </footer>
-
-    <section style="padding:20px;background:#0d0d0d;text-align:left;font-size:14px;color:#eee;border-top:1px solid rgba(255,255,255,0.08);">
-      <h2 style="font-size:16px;margin:0 0 12px 0;color:#ff6b81;">🔥 Exclusive • More Girls</h2>
-      <div style="margin-bottom:14px;">
-        <strong style="color:#fff;">Lory</strong><br>
-        <span style="color:#bbb;">Soft. Dangerous. Addictive.</span><br>
-        <a href="https://onlyfans.com/lory_dark_21/c93" target="_blank" style="color:#ff6b81;text-decoration:none;">→ View profile</a>
-      </div>
-      <div style="margin-bottom:14px;">
-        <strong style="color:#fff;">Mari</strong><br>
-        <span style="color:#bbb;">Cute face. Bad intentions.</span><br>
-        <a href="https://onlyfans.com/hottie.mari/c115" target="_blank" style="color:#ff6b81;text-decoration:none;">→ View profile</a>
-      </div>
-      <div style="margin-bottom:6px;">
-        <strong style="color:#fff;">Stacy</strong><br>
-        <span style="color:#bbb;">Sweet body. Wild energy.</span><br>
-        <a href="https://onlyfans.com/stacy_hottea/c97" target="_blank" style="color:#ff6b81;text-decoration:none;">→ View profile</a>
-      </div>
-    </section>
   </div>
 
   <script>
-    // Инструкция: если у тебя есть локальный файл изображения из загрузки, поменяй путь ниже.
-    // Пример: document.getElementById('heroImg').src = '/mnt/data/rgthree.compare._temp_julsf_00137_.png';
-    // Или загрузи картинку на хостинг и поставь URL.
+    // Замена главного изображения (если нужно использовать локалку):
+    // document.getElementById('heroImg').src = '/path/to/your/photo.jpg';
 
-    // Если хочешь, могу подставить одно из твоих конкретных файлов — скажи имя файла.
+    // Подсказка: если хочешь, чтобы превью в карточках были другие фото,
+    // просто поменяй inline background-image на прямые URL твоих картинок (или локальный путь).
   </script>
 </body>
 </html>
